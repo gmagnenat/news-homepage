@@ -1,0 +1,10 @@
+---
+interface NavigationItem {
+  name: string;
+  url: string;
+}
+
+const { name, url } = Astro.props as NavigationItem;
+---
+
+<li><a href={url}>{name}</a></li>

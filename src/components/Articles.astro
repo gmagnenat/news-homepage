@@ -1,0 +1,33 @@
+---
+const articles = [
+  {
+    title: 'Reviving Retro PCs',
+    description: 'What happens when old PCs are given modern upgrades?',
+    image: '/images/image-retro-pcs.jpg',
+  },
+  {
+    title: 'Top 10 Laptops of 2022',
+    description: 'Our best picks for various needs and budgets.',
+    image: '/images/image-top-laptops.jpg',
+  },
+  {
+    title: 'The Growth of Gaming',
+    description: 'How the pandemic has sparked fresh opportunities.',
+    image: '/images/image-gaming-growth.jpg',
+  },
+]
+---
+<section class="">
+  <h2 class="sr-only">Featured Articles</h2>
+  <ul class="grid md:grid-cols-3 gap-6 counter-list">
+    {articles.map((article) => (
+      <li class="flex gap-4">
+        <img src={article.image} alt="" class="max-w-28">
+        <div>
+          <h3 class="text-2xl font-bold flex flex-col"><a href="#">{ article.title }</a></h3>
+          <p>{ article.description }</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>

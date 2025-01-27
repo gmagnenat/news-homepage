@@ -1,0 +1,33 @@
+---
+import NavigationItem from "./navigationItem.astro";
+
+const links = {
+  Home: "/",
+  News: "/news",
+  Popular: "/popular",
+  Trending: "/trending",
+  Categories: "/categories",
+}
+---
+<header class="flex items-center justify-between py-6 w-full max-w-[69.375rem]">
+  <div><a href="/"><img src="../../public/images/logo.svg" alt="W"></a></div>
+  <nav class="hidden md:block">
+    <ul class="navigation flex gap-4">
+      {Object.entries(links).map(([name, url]) => (
+        <NavigationItem name={name} url={url} />
+      ))}
+    </ul>
+  </nav>
+  <button class="md:hidden" aria-expanded="false" aria-label="mobile menu">
+    <img src="../../public/images/icon-menu.svg" alt="Menu" />
+  </button>
+  <dialog class="mobile-menu backdrop:bg-very-dark-blue">
+    <button class="cursor-pointer"><img src="../../public/images/icon-menu-close.svg" alt=""></button>
+    <nav>
+      <ul class="navigation flex flex-col gap-4">
+        {Object.entries(links).map(([name, url]) => (
+          <NavigationItem name={name} url={url} />
+        ))}
+      </ul>
+  </dialog>
+</header>
