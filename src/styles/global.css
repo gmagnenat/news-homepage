@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-soft-orange: hsl(35, 77%, 62%);
+  --color-soft-red: hsl(5, 85%, 63%);
+  --color-off-white: hsl(36, 100%, 99%);
+  --color-silver: hsl(236, 8%, 79%);
+  --color-grayish-blue: hsl(236, 13%, 42%);
+  --color-very-dark-blue: hsl(240, 100%, 5%);
+
+  --font-display: "Inter", sans-serif;
+
+  --text-base: 0.9375rem;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../public/fonts/Inter-VariableFont_slnt,wght.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: bold;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../public/fonts/Inter-VariableFont_slnt,wght.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: extra-bold;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../../public/fonts/Inter-VariableFont_slnt,wght.ttf") format("ttf");
+}
+
+@layer base {
+  body {
+    @apply font-display text-very-dark-blue bg-off-white;
+  }
+
+  p {
+    @apply text-base;
+  }
+}
+
+@layer utilities {
+  .counter-list {
+    counter-reset: list-counter;
+  }
+
+  .counter-list li {
+    counter-increment: list-counter;
+  }
+
+  .counter-list h3::before {
+    content: counter(list-counter) "";
+    @apply text-soft-red text-4xl font-black;
+  }
+
+  .mobile-menu:backdrop {
+    @apply bg-very-dark-blue;
+  }
+}
