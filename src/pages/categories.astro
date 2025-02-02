@@ -1,6 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import Hero from "../components/Hero.astro"
+import PageTitle from "../components/PageTitle.astro"
+import fetchApi from "../lib/strapi"
+import PostsGrid from "../components/PostsGrid.astro"
+
+const posts = await fetchApi({
+  endpoint: 'posts?populate=*',
+  wrappedByKey: 'data',
+})
+
+const title = 'Categories'
 ---
 <Layout>
-  <h1>Categories</h1>
+  <PostsGrid posts={posts} />
 </Layout>

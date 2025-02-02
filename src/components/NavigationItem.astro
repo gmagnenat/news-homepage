@@ -7,4 +7,4 @@ interface NavigationItem {
 const { name, url } = Astro.props as NavigationItem;
 ---
 
-<li><a href={url}>{name}</a></li>
+<li><a class="text-grayish-blue font-thin hover:text-soft-red hover:underline underline-offset-8 transition-all" href={url}>{name}</a></li>

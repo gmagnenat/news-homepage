@@ -1,4 +1,5 @@
 ---
+import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
 ---
@@ -7,24 +8,17 @@ import "../styles/global.css";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="../../public/images/favicon-32x32.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>World. Tech News</title>
 	</head>
 	<body class="p-4 flex flex-col min-h-svh items-center">
-		<Header />
-		<main class="max-w-[69.375rem]">
-			<slot />
-		</main>
+		<div class="max-w-[69.375rem] w-full">
+			<Header />
+			<main class="">
+				<slot />
+			</main>
+			<Footer />
+		</div>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-		font-family: "Inter", sans-serif;
-	}
-</style>

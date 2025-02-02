@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "astro-news-page",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,7 +10,15 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.0",
+    "@types/date-fns": "^2.6.3",
     "astro": "^5.1.9",
+    "date-fns": "^4.1.0",
+    "marked": "^15.0.6",
+    "qs": "^6.14.0",
+    "sharp": "^0.33.5",
     "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.18"
   }
 }

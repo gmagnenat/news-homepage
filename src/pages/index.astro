@@ -1,20 +1,39 @@
 ---
+import fetchApi from '../lib/strapi';
+import type { Post } from '../interfaces/post';
+
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import News from '../components/News.astro';
 import Articles from '../components/Articles.astro';
+
+const latestPosts = await fetchApi<Post[]>({
+  endpoint: 'posts?populate=*',
+  query: {
+    sort: `updatedAt:desc`,
+    limit: 1,
+    _fields: ["title", "slug", "excerpt", "featuredImageDesktop", "featuredImageMobile"],
+  },
+  wrappedByKey: 'data'
+});
+
+const {featuredImageDesktop, featuredImageMobile, excerpt, title, slug} = latestPosts[0];
+
+const heroImgDesktopUrl = import.meta.env.STRAPI_URL + featuredImageDesktop?.url;
+const heroImgMobileUrl = import.meta.env.STRAPI_URL + featuredImageMobile?.url;
+const heroPostUrl = `/post/${slug}`;
 ---
 
 <Layout>
-	<div class="grid md:grid-cols-3 grid-rows-[19rem, auto, auto] row-auto gap-6">
-		<div class="md:col-span-2">
-			<Hero />
-		</div>
-		<div class="bg-very-dark-blue text-off-white p-6">
-			<News>
-		</div>
-		<div class="md:col-span-3">
-			<Articles />
-		</div>
+	<div class="grid grid-cols-1 gap-6 md:grid md:grid-cols-3 md:grid-rows-[1fr_auto_auto]">
+		<Hero 
+      title={title} 
+      heroImgDesktopUrl={heroImgDesktopUrl};
+      heroImgMobileUrl={heroImgMobileUrl};
+      heroContent={excerpt} 
+      heroPostUrl={heroPostUrl}
+    />
+		<News posts={latestPosts} />
+		<Articles posts={latestPosts} />
 	</div>
 </Layout>

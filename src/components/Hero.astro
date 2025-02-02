@@ -1,20 +1,33 @@
 ---
-import { Image } from "astro:assets";
+export interface HeroProps {
+  title: string;
+  heroImgDesktopUrl?: string;
+  heroImgMobileUrl?: string;
+  heroContent?: string;
+  heroPostUrl?: string;
+}
 
-title: "Hero"
+const { title, heroImgDesktopUrl, heroImgMobileUrl, heroContent, heroPostUrl } = Astro.props as HeroProps;
 
-const title = "The Bright Future of Web 3.0?";
-import heroImageDesktop from "../../public/images/image-web-3-desktop.jpg";
-import heroImageMobile from "../../public/images/image-web-3-mobile.jpg";
+console.log(heroPostUrl)
+
 ---
-<section class="flex flex-col">
-  <Image src={heroImageMobile} alt="Abstract wooden colored puzzle" class="w-full h-auto md:hidden" priority />
-  <Image src={heroImageDesktop} alt="Abstract wooden colored puzzle" class="w-full h-auto hidden md:block" priority />
-  <div class="grid md:grid-cols-2 gap-4 mt-6">
-    <h1 class="text-6xl font-black">{ title }</h1>
-    <div class="flex flex-col gap-4 pt-4">
-      <p class="leading-8">We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. But is it really fulfilling its promise?</p>
-      <a href="/articles" class="btn bg-soft-red px-4 py-4 max-w-max hover:bg-very-dark-blue hover:text-off-white transition-all mt-auto">Read More</a>
+<section class="hero col-start-1 col-end-4 md:col-start-1 md:col-end-3">
+  
+    <div class="md:col-span-2 col-start-1 col-end-3">
+      <picture>
+        <source srcset={heroImgDesktopUrl} class="w-full h-full hidden object-cover md:block" media="(min-width: 40rem)" />
+        <img src={heroImgMobileUrl} alt="Abstract wooden colored puzzle">
+      </picture>
     </div>
+  <div class=" col-span-2 grid md:grid-cols-2 gap-6 mt-10">
+    <h1 class="text-6xl font-black text-very-dark-blue">{ title }</h1>
+    {heroContent &&
+      <div class="">
+        <p class="leading-8">{heroContent}</p>
+        <a href={heroPostUrl} class="bg-soft-red inline-block uppercase font-bold tracking-[.4em] mt-10 hover:bg-very-dark-blue hover:text-off-white py-4 px-8 text-very-dark-blue">Read More</a>
+      </div>
+    }
   </div>
 </section>
+

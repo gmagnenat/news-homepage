@@ -1,0 +1,18 @@
+---
+import type {Post} from '../interfaces/post';
+interface PostsGridProps {
+  posts: Post[];
+}
+const { posts } = Astro.props as PostsGridProps;
+---
+<section class="news md:col-start-1 md:col-end-4 md:mt-10">
+  <h2 class="sr-only">News</h2>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {posts.map(({excerpt, title, featuredImageMobile, slug}:Post):Post => (
+     <li>
+      <img src={`${import.meta.env.STRAPI_URL}${featuredImageMobile?.url}`} alt="">
+      <h3><a href={`/post/${slug}`}>{ title }</a></h3>
+     </li>
+      ))}
+  </ul>
+</section>

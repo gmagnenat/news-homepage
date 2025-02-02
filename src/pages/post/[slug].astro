@@ -1,0 +1,31 @@
+---
+import fetchApi from '../../lib/strapi';
+import type { Post } from '../../interfaces/post';
+import { Image } from 'astro:assets';
+import {marked} from 'marked';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await fetchApi<Post[]>({
+    endpoint: 'posts?populate=featuredImageDesktop',
+    wrappedByKey: 'data',
+  });
+
+  return posts.map((post:Post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+
+const featuredImageUrl = import.meta.env.STRAPI_URL + post.featuredImageDesktop?.url as string;
+
+---
+<Layout>
+  <div class="typography">
+    <h1>{post.title}</h1>
+    <img src={featuredImageUrl} alt={post.title} />
+    <div class="max-w-3xl mx-auto" set:html={marked(post.content)}></div>
+  </div>
+</Layout>

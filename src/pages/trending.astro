@@ -1,6 +1,16 @@
 ---
+import PageTitle from "../components/PageTitle.astro"
 import Layout from "../layouts/Layout.astro"
+const title = 'Trending'
+import fetchApi from '../lib/strapi';
+import type { Post } from '../interfaces/post';
+import PostsGrid from "../components/PostsGrid.astro";
+
+const posts = await fetchApi<Post[]>({
+  endpoint: 'posts?populate=*',
+  wrappedByKey: 'data',
+});
 ---
 <Layout>
-  <h1>Trending</h1>
+  <PostsGrid posts={posts} />
 </Layout>

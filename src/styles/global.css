@@ -39,7 +39,7 @@
 
 @layer base {
   body {
-    @apply font-display text-very-dark-blue bg-off-white;
+    @apply font-display text-grayish-blue bg-off-white;
   }
 
   p {
@@ -57,11 +57,29 @@
   }
 
   .counter-list h3::before {
-    content: counter(list-counter) "";
+    content: "0" counter(list-counter);
     @apply text-soft-red text-4xl font-black;
   }
 
   .mobile-menu:backdrop {
     @apply bg-very-dark-blue;
+  }
+}
+
+@layer components {
+  .typography {
+    h1 {
+      @apply text-very-dark-blue text-4xl my-8 font-black;
+    }
+    h2 {
+      @apply text-very-dark-blue text-2xl my-6 font-black;
+    }
+    hr {
+      @apply my-10;
+    }
+
+    p {
+      @apply my-2;
+    }
   }
 }
